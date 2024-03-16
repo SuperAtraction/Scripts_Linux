@@ -3,6 +3,7 @@
 # Execution Nmap
 output=$(sudo nmap -sn 192.168.1.0/24 | grep -E 'Nmap scan report for' | sed -E 's/Nmap scan report for ([^(]+) \(([0-9.]+)\)/\1 \2/' | awk '{if ($1 != "Nmap") print}' | sed 's/.home//g')
 
+# Création du html
 html_content="<html>
 <head>
   <title>Rapport Nmap</title>
@@ -26,6 +27,7 @@ html_content="<html>
       <th>IP</th>
     </tr>"
 
+# Création du tableau
 while IFS= read -r line; do
   html_content+="    <tr>"
   html_content+="      <td>${line%% *}</td>"
